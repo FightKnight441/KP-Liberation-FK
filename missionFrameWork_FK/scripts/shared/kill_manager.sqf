@@ -170,22 +170,7 @@ if (isServer) then {
 // Body/Wreck deletion after cleanup delay
 if (isServer && !isplayer _unit) then {
     sleep GRLIB_cleanup_delay;
-    
-    // New delete method! Hopefully clears more shit up :)
-    [[],{
-        for '_i' from 1 to 3 do {
-            _allMObjects = allMissionObjects 'All';
-                {
-                    if ((!alive _x) or (damage _x == 1)) then {
-                        deleteVehicle _x;
-                    }
-
-                } forEach _allMObjects;
-            sleep 0.5;
-        };
-        {
-        if (count units _x == 0) then {deleteGroup _x};
-        } forEach allGroups;
-    }] remoteExec ['spawn',2];
-    hint format ["%1 dead bodies were removed.",_countDead];
+    hidebody _unit;
+    sleep 10;
+    deleteVehicle _unit;
 };
