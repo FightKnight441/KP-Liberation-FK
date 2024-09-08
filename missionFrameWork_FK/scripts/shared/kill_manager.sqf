@@ -131,6 +131,7 @@ if (isServer) then {
 
             // Killed by a player
             if (isPlayer _killer) then {
+                [format ["%1 has killed a civilian!", name _killer]] remoteExec ["systemChat", -2]; // -2 sends to all players
                 stats_civilians_killed_by_players = stats_civilians_killed_by_players + 1;
             };
         };
